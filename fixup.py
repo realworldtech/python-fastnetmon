@@ -20,10 +20,12 @@ def main():
 		if hostgroup.threshold_mbps > 5000:
 			print("We would change %s to have a lower threshold" % hostgroup.name)
 			hostgroup.threshold_mbps = 5000
-		if hostgroup.threshold_mbps < 100:
-			hostgroup.threshold_mbps = 100
+		if hostgroup.threshold_mbps < 200:
+			hostgroup.threshold_mbps = 200
+			print("Lifted threshold to 200Mbps for %s" % hostgroup.name)
 		if hostgroup.threshold_pps == 0:
 			print("Hmm. Hostgroup %s does not have a pps threshold. Should it exist?" % hostgroup.name)
+	client.commit()
 
 
 if __name__ == '__main__':

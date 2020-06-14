@@ -50,9 +50,12 @@ class FastNetMonAPI:
 				result['error_text'],
 				url))
 
-	def put(self, path, key, value):
-		parts = "/".join([path, key, str(value)])
-		url = urljoin(self.url, parts)
+	def put(self, path, key=None, value=None):
+		if key is not None:
+			parts = "/".join([path, key, str(value)])
+			url = urljoin(self.url, parts)
+		else:
+			url = urljoin(self.url, path)
 		if self.debug:
 			print(url)
 		result = self.client.put(url).json()
@@ -62,6 +65,9 @@ class FastNetMonAPI:
 			raise Exception("An error occured %s while retrieving %s" % (
 				result['error_text'],
 				url))
+
+	def commit(self):
+		self.put("commit")
 
 	@property
 	def networks(self):
