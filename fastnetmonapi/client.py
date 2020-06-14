@@ -87,3 +87,6 @@ class FastNetMonAPI:
 		for hostgroup in self.get("hostgroup"):
 			groups[hostgroup['name']] = (Hostgroup(self, hostgroup))
 		return groups
+
+	def bandwidth_to_pps(self, bandwidth_mbps=0, packet_size=1500):
+		return int((bandwidth_mbps*1024*1024)/(packet_size+20))
