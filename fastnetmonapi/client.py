@@ -52,6 +52,8 @@ class FastNetMonAPI:
 
 	def put(self, path, key=None, value=None):
 		if key is not None:
+			if value is True or value is False:
+				value = "enable" if value else "disable"
 			parts = "/".join([path, key, str(value)])
 			url = urljoin(self.url, parts)
 		else:
