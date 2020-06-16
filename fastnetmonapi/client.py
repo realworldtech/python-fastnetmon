@@ -59,8 +59,10 @@ class FastNetMonAPI:
 		else:
 			url = urljoin(self.url, path)
 		if self.debug:
-			print(url)
-		result = self.client.put(url).json()
+			print("Not executing request, but would call %s" % url)
+			result = {'success': True}
+		else:
+			result = self.client.put(url).json()
 		if result['success']:
 			return result
 		else:
